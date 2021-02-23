@@ -1,6 +1,6 @@
 
 <div class="app-home-component">
-    <div class="tasks">
+    <!-- <div class="tasks">
         <div>- can you make nation cards 'hilite' in some way when user mouse-over, select</div>
         <div>- when click on a nation card, fill out the info below</div>
         <div>- when select a nation, can u make image at #flag fade in (css)</div>
@@ -8,28 +8,43 @@
         <div>- can u make the ui 'mobile responsive' ? (ex. have info/flag in a column instead of a row)</div>
         <div>- can u write a unit test that verifies there are 250 nations ?</div>
         <div>- add any cool features u can think of</div>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start center" class="nations">
+    </div> -->
+    <div fxLayout="row" 
+        fxLayout.md="row wrap"
+        fxLayout.sm="row wrap"
+        fxLayout.xs="row wrap" 
+        fxLayoutAlign="start center" class="nations">
         <div *ngFor="let nation of nations" class="nation-div">
-            <div fxLayout="column" (mouseover)="hilite(nation)" class="nation">
+            <div fxLayout="column" (mouseover)="hilite(nation)" (click)="selectNation(nation)" class="nation">
                 <div>{{nation.alpha3Code}}</div>
-                <img [src]="nation.flag" alt="" draggable="false" class="image">
+                <img [src]="nation.flag" alt="" draggable="false" class="image" [ngClass]="{'selected': nation.name === selectedNation.name}">
             </div>
         </div>
     </div>
     <div class="hilite">
         {{hilitedName}}
     </div>
-    <div fxLayout="row" fxLayoutAlign="space-between start" class=info>
+    <div fxLayout="row" 
+        fxLayout.md="row wrap"
+        fxLayout.sm="row wrap"
+        fxLayout.xs="row wrap" 
+        fxLayoutAlign="space-between start" class=info>
         <div class="active">
-            <div>name:</div>
-            <div>native name:</div>
-            <div>capital:</div>
-            <div>latitude:</div>
-            <div>longitude:</div>
+            <div>name: {{selectedNation.name}}</div>
+            <div>native name: {{selectedNation.nativeName}}</div>
+            <div>capital: {{selectedNation.capital}}</div>
+            <div>latitude: {{selectedNation.latitude}}</div>
+            <div>longitude: {{selectedNation.longitude}}</div>
         </div>
         <div>
-            <img #flag style="border:1px dashed blue;width:320px;height:240px;">
+            <img *ngIf="selectedNation.flag" [src]="selectedNation.flag" style="border:1px dashed blue;width:320px;height:240px;">
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between start">
+            <google-map
+            height="250px"
+            [zoom]="zoom"
+            [center]="center" 
+            ></google-map>
         </div>
     </div>
 </div>

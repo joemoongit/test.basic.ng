@@ -2,6 +2,9 @@
 .app-home-component {
     width: calc( 100% - 4rem );
     margin-left: 2rem;
+    height: 100%;
+    overflow-y: auto;
+    margin-top: 1%;
 }
 
 .tasks {
@@ -29,6 +32,11 @@
         cursor: pointer;
     }
 
+    .nation:hover {
+        opacity: 0.5;
+        background-color: lightblue;
+    }
+
     .image {
         width: calc( 128px - 1rem );
         height: 72px;
@@ -36,6 +44,10 @@
         overflow: hidden;
         object-fit: cover;
         border: 1px solid black;
+    }
+
+    .selected {
+        opacity: 0.10;
     }
 }
 
